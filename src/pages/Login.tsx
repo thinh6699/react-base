@@ -9,7 +9,6 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
-  let from = (location.state as any).from.pathname || '/'
   const {
     register,
     handleSubmit,
@@ -31,8 +30,8 @@ function Login() {
     ...register('password', {
       required: 'Password is required',
       minLength: {
-        value: 8,
-        message: 'Password must be at least 8 letters'
+        value: 3,
+        message: 'Password must be at least 3 letters'
       }
     })
   }
@@ -43,6 +42,9 @@ function Login() {
   }, [])
 
   const login = (data: any) => {
+    const from = (location.state as any)
+      ? (location.state as any).from.pathname
+      : '/'
     dispatch(handleToken('ey12456abcd789'))
     navigate(from)
   }

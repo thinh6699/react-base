@@ -8,11 +8,11 @@ function Home() {
 
   const logout = () => {
     dispatch(setTokenNull())
-    navigate('/login')
+    navigate('login')
   }
 
   const createTodo = () => {
-    navigate('/new-todo')
+    navigate('new-todo')
   }
 
   return (
