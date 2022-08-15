@@ -14,16 +14,16 @@
 
 @for $i from 1 through 9 {
   .fw-#{$i}00 {
-    font-weight: #{$i} * 100 !important;
+    font-weight: $i * 100 !important;
   }
 }
 
 @include media-breakpoint-up(lg) {
   @for $i from 1 through 9 {
-  .fw-lg-#{$i}00 {
-    font-weight: #{$i} * 100 !important;
+    .fw-lg-#{$i}00 {
+      font-weight: #{$i} * 100 !important;
+    }
   }
-}
 }
 
 @for $i from 1 through 5 {
@@ -49,4 +49,8 @@
 
 .word-break {
   word-break: break-word;
+}
+
+.text-line-through {
+  text-decoration: line-through;
 }

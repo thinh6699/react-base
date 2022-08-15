@@ -104,6 +104,10 @@
   min-height: 100vh;
 }
 
+.min-h-screen-main {
+  min-height: calc(100vh - 120px);
+}
+
 .w-unset {
   width: unset !important;
 }
@@ -111,7 +115,6 @@
 .h-unset {
   height: unset !important;
 }
-
 
 @for $i from 0 through 100 {
   .pt-p-#{$i} {

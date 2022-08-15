@@ -3,9 +3,12 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
+import Tasks from '../stores/Tasks'
+import Token from '../stores/Token'
 
 const reducers = combineReducers({
-  // favoriteUsers: favoriteUsersSlice
+  token: Token,
+  tasks: Tasks
 })
 
 const persistConfig = {

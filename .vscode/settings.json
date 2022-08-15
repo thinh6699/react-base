@@ -1,0 +1,109 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "files.associations": {},
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.suggestFontSize": 14,
+  "editor.tokenColorCustomizations": {},
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.suggestSelection": "first",
+  "markdown.preview.fontSize": 14,
+  "terminal.integrated.fontSize": 14,
+  "debug.console.fontSize": 14,
+  "html.format.indentInnerHtml": true,
+  "html.format.indentHandlebars": true,
+  "html.format.wrapLineLength": 80,
+  "html.format.endWithNewline": true,
+  "git.path": "",
+  "php.validate.executablePath": "",
+  "eslint.debug": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.quiet": true,
+  "eslint.run": "onSave",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveSassCompile.settings.generateMap": false,
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/src"
+    }
+  ],
+  "prettier.trailingComma": "none",
+  "prettier.semi": false,
+  "prettier.arrowParens": "avoid",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    // "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[php]": {
+    "editor.tabSize": 4
+  },
+  "vetur.experimental.templateInterpolationService": false,
+  "git.autofetch": true,
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command",
+    "switch:command",
+    "branch-create:command"
+  ],
+  "typescript.preferences.quoteStyle": "single",
+  "angular.enable-experimental-ivy-prompt": false,
+  "javascript.preferences.quoteStyle": "single",
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "css.validate": false,
+  "workbench.editor.untitled.hint": "hidden",
+  "git.suggestSmartCommit": false,
+  "explorer.confirmDelete": false,
+  "terminal.integrated.tabs.enabled": true,
+  "npm.includeDirectories": [],
+  "notebook.displayOrder": [],
+  "editor.rulers": [],
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "extensions.ignoreRecommendations": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "tabnine.experimentalAutoImports": true,
+  "editor.linkedEditing": true,
+  "bracketPairColorizer.depreciation-notice": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.maxComputationTime": 0,
+  "vscodeGoogleTranslate.preferredLanguage": "English",
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnType": true,
+  "eslint.codeActionsOnSave.rules": null,
+  "editor.formatOnSave": true
+}
