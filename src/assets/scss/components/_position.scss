@@ -1,0 +1,59 @@
+@include media-breakpoint-up(lg) {
+  .position-lg-relative {
+    position: relative !important;
+  }
+
+  .position-lg-absolute {
+    position: absolute !important;
+  }
+
+  .position-lg-fixed {
+    position: fixed !important;
+  }
+
+  .position-lg-initial {
+    position: initial !important;
+  }
+
+  .start-lg-auto {
+    left: auto !important;
+  }
+}
+
+@for $i from 0 through 100 {
+  .start--#{$i} {
+    left: $i * 4px !important;
+  }
+
+  .end--#{$i} {
+    right: $i * 4px !important;
+  }
+
+  .top--#{$i} {
+    top: $i * 4px !important;
+  }
+
+  .bottom--#{$i} {
+    bottom: $i * 4px !important;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  @for $i from 0 through 100 {
+    .start-lg--#{$i} {
+      left: $i * 4px !important;
+    }
+
+    .end-lg--#{$i} {
+      right: $i * 4px !important;
+    }
+
+    .top-lg--#{$i} {
+      top: $i * 4px !important;
+    }
+
+    .bottom-lg--#{$i} {
+      bottom: $i * 4px !important;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+@for $i from 0 through 10 {
+  .rounded-#{$i} {
+    border-radius: $i * 4px !important;
+  }
+}

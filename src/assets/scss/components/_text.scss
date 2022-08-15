@@ -1,0 +1,52 @@
+@for $i from 1 through 80 {
+  .fs-#{$i} {
+    font-size: #{$i}px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  @for $i from 1 through 80 {
+    .fs-lg-#{$i} {
+      font-size: #{$i}px;
+    }
+  }
+}
+
+@for $i from 1 through 9 {
+  .fw-#{$i}00 {
+    font-weight: #{$i} * 100 !important;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  @for $i from 1 through 9 {
+  .fw-lg-#{$i}00 {
+    font-weight: #{$i} * 100 !important;
+  }
+}
+}
+
+@for $i from 1 through 5 {
+  .text-line-clamp-#{$i} {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $i;
+  }
+}
+
+.un-select-text {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@for $i from 1 through 50 {
+  .lh-#{$i} {
+    line-height: $i * 4px;
+  }
+}
+
+.word-break {
+  word-break: break-word;
+}

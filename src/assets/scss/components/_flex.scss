@@ -1,0 +1,45 @@
+@for $i from 0 through 10 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.flex-fixed {
+  flex: 0 0 auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
+@include media-breakpoint-up(lg) {
+  .flex-lg-auto {
+    flex: 1 1 auto;
+  }
+
+  .flex-lg-initial {
+    flex: 0 1 auto;
+  }
+
+  .flex-lg-fixed {
+  flex: 0 0 auto;
+}
+
+  .flex-lg-none {
+    flex: none;
+  }
+}

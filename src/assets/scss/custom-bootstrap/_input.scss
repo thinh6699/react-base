@@ -1,0 +1,10 @@
+$input-padding-x: 16px;
+$input-padding-y: 8px;
+$input-font-size: 16px;
+$input-border-color: $border-color;
+$form-check-input-width: 1.75em;
+$input-btn-focus-width: 0;
+
+.search-input.form-control:focus {
+  border-width: 2px;
+}
