@@ -20,7 +20,15 @@ function TodoItem() {
   }) // define validation
 
   useEffect(() => {
-    setListTask(lstTasks)
+    const lstTemp: Tasks[] = lstTasks.map((task: Tasks) => {
+      return new Tasks({
+        id: task.id,
+        name: task.name,
+        isCompleted: task.isCompleted,
+        isEdit: task.isEdit
+      })
+    })
+    setListTask(lstTemp)
   }, [lstTasks])
 
   const setCompleted = (item: Tasks) => {
@@ -36,7 +44,7 @@ function TodoItem() {
     if (item.isCompleted) {
       const newList = listTasks.filter((task: Tasks) => task.id !== item.id)
       dispatch(handleListTask(newList))
-      setListTask([...lstTasks])
+      setListTask([...newList])
     }
   }
 
@@ -44,9 +52,9 @@ function TodoItem() {
     item.isEdit = !item.isEdit
     if (!item.isEdit) {
       item.name = data[`task${item.id}`]
+      dispatch(handleListTask([...listTasks]))
+      setListTask([...listTasks])
     }
-    dispatch(handleListTask([...listTasks]))
-    setListTask([...listTasks])
   }
 
   // const setValue = (e: ChangeEvent<HTMLInputElement>, item: Tasks) => {
