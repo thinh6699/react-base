@@ -9,9 +9,9 @@ import NewTodo from '../pages/NewTodo'
 
 function Routers() {
   const RequireAuth = ({ children }: { children: JSX.Element }) => {
-    let token = store.getState().token
-    let location = useLocation()
-    let navigate = useNavigate()
+    const token = store.getState().token
+    const location = useLocation()
+    const navigate = useNavigate()
 
     useEffect(() => {
       if (!token) {

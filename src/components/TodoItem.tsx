@@ -14,7 +14,7 @@ function TodoItem() {
   }, [lstTasks])
 
   const setCompleted = (item: Tasks) => {
-    item.isCompleted = true
+    item.isCompleted = !item.isCompleted
     item.isEdit = false
     dispatch(handleListTask([...listTasks]))
     setListTask([...listTasks])
@@ -22,7 +22,7 @@ function TodoItem() {
 
   const deleteTask = (item: Tasks) => {
     if (item.isCompleted) {
-      let newList = listTasks.filter((task: Tasks) => task.id !== item.id)
+      const newList = listTasks.filter((task: Tasks) => task.id !== item.id)
       dispatch(handleListTask(newList))
       setListTask([...lstTasks])
     }
@@ -68,7 +68,7 @@ function TodoItem() {
                   return (
                     <div
                       className={
-                        'flex-1 me-3 mb-3 py-2 px-4 minw--25 ' +
+                        'flex-1 me-3 mb-3 py-2 px-4 minw--25 word-break ' +
                         (item.isCompleted ? 'text-line-through' : '')
                       }
                     >
@@ -78,22 +78,20 @@ function TodoItem() {
                 }
               })()}
               <div className='d-flex align-items-center mb-3'>
-                {item.isCompleted ? null : (
-                  <div className='me-2'>
-                    <button
-                      onClick={() => setEdit(item)}
-                      className='btn btn-outline-info me-2'
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => setCompleted(item)}
-                      className='btn btn-outline-success'
-                    >
-                      Complete
-                    </button>
-                  </div>
-                )}
+                <div className='me-2'>
+                  <button
+                    onClick={() => setEdit(item)}
+                    className='btn btn-outline-info me-2'
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => setCompleted(item)}
+                    className='btn btn-outline-success'
+                  >
+                    Complete
+                  </button>
+                </div>
                 <button
                   onClick={() => deleteTask(item)}
                   className='btn btn-outline-danger'
