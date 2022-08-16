@@ -1,6 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { handleToken, setTokenNull } from '../stores/Token'
@@ -9,6 +10,7 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
+  const { t } = useTranslation()
   const {
     register,
     handleSubmit,
@@ -51,7 +53,7 @@ function Login() {
 
   return (
     <div className='login mw--100 mx-auto'>
-      <h2 className='my-10 text-center'>Login Form</h2>
+      <h2 className='my-10 text-center'>{t('auth.login_form')}</h2>
       <div className='login-form'>
         <div className='user-field mb-4'>
           <label htmlFor='userName' className='fw-500 mb-1 ps-1'>

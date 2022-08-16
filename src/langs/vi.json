@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "login_form": "Đăng nhập"
+  },
+  "home": {
+    "new_todo": "Công việc mới",
+    "logout": "Đăng xuất"
+  }
+}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setTokenNull } from '../stores/Token'
@@ -5,6 +6,7 @@ import { setTokenNull } from '../stores/Token'
 function Home() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const logout = () => {
     dispatch(setTokenNull())
@@ -19,10 +21,10 @@ function Home() {
     <div className='homepage mw--100 mx-auto'>
       <div className='flex-center min-h-screen-main'>
         <button onClick={createTodo} className='btn btn-primary minw--25 me-3'>
-          New Todo
+          {t('home.new_todo')}
         </button>
         <button onClick={logout} className='btn btn-outline-primary minw--25'>
-          Logout
+          {t('home.logout')}
         </button>
       </div>
     </div>

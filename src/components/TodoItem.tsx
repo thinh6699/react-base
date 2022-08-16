@@ -107,7 +107,7 @@ function TodoItem() {
                   return (
                     <div
                       className={
-                        'flex-1 me-3 mb-3 py-2 px-4 minw--25 word-break ' +
+                        'flex-1 me-3 mb-3 py-2 px-4 minw--25 word-break text-truncate ' +
                         (item.isCompleted ? 'text-line-through' : '')
                       }
                     >
