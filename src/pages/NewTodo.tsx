@@ -1,5 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,6 @@ import { handleListTask } from '../stores/Tasks'
 function NewTodo() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const listTasks = store.getState().tasks
   const {
     register,
     setValue,
@@ -30,22 +29,18 @@ function NewTodo() {
     })
   }
 
-  const backToHome = () => {
-    navigate('/')
-  }
-
   const addTask = (data: any) => {
-    let lstTasks: Tasks[] = [...listTasks]
-    lstTasks.push(
+    let lstTemp: Tasks[] = [...store.getState().tasks]
+    lstTemp.push(
       new Tasks({ id: Math.random(), name: data.task, isCompleted: false })
     )
-    dispatch(handleListTask(lstTasks))
+    dispatch(handleListTask(lstTemp))
     setValue('task', '')
   }
 
-  useEffect(() => {
-    console.log(listTasks)
-  }, [listTasks])
+  const backToHome = () => {
+    navigate('/')
+  }
 
   return (
     <div className='todo mw--150 mx-auto'>

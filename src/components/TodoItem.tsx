@@ -7,23 +7,23 @@ import { handleListTask } from '../stores/Tasks'
 function TodoItem() {
   const dispatch = useDispatch()
   const lstTasks = store.getState().tasks
-  const [listTasks, setListTask] = useState<Tasks[]>(lstTasks)
+  const [listTasks, setListTask] = useState<Tasks[]>([])
 
   useEffect(() => {
     setListTask(lstTasks)
-  }, [lstTasks])
+  }, [lstTasks.length])
 
   const setCompleted = (item: Tasks) => {
     item.isCompleted = true
-    setListTask([...listTasks])
     dispatch(handleListTask([...listTasks]))
+    setListTask([...listTasks])
   }
 
   const deleteTask = (item: Tasks) => {
     if (item.isCompleted) {
       let newList = listTasks.filter((task: Tasks) => task.id !== item.id)
-      setListTask(newList)
       dispatch(handleListTask(newList))
+      setListTask(lstTasks)
     }
   }
 
@@ -76,7 +76,7 @@ function TodoItem() {
             </div>
           )
         } else {
-          return <div className='pt-5'>All tasks completed</div>
+          return ''
         }
       })()}
     </div>

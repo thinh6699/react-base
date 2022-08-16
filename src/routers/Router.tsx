@@ -14,7 +14,7 @@ import Login from '../pages/Login'
 import NewTodo from '../pages/NewTodo'
 
 function Routers() {
-  function RequireAuth({ children }: { children: JSX.Element }) {
+  const RequireAuth = ({ children }: { children: JSX.Element }) => {
     let token = store.getState().token
     let location = useLocation()
     let navigate = useNavigate()
