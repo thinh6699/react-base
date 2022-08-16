@@ -1,4 +1,8 @@
 {
+  "language": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
   "auth": {
     "login_form": "Đăng nhập"
   },

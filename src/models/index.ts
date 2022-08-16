@@ -7,3 +7,11 @@ export class Tasks {
     Object.assign(this, init)
   }
 }
+
+export class SimpleModel {
+  text: string = 'Vietnamese'
+  code: string = 'vi'
+  constructor(init?: Partial<SimpleModel>) {
+    Object.assign(this, init)
+  }
+}
