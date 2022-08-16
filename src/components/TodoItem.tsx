@@ -41,6 +41,15 @@ function TodoItem() {
     setListTask([...listTasks])
   }
 
+  const handleKeyPress = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    item: Tasks
+  ) => {
+    if (e.key === 'Enter') {
+      setEdit(item)
+    }
+  }
+
   return (
     <div className='list-todo'>
       <div className='maxh--137 overflow-auto'>
@@ -61,6 +70,7 @@ function TodoItem() {
                         onChange={e => {
                           setValue(e, item)
                         }}
+                        onKeyUp={e => handleKeyPress(e, item)}
                       />
                     </div>
                   )
