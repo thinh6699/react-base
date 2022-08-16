@@ -31,7 +31,7 @@ function NewTodo() {
   const addTask = (data: any) => {
     let lstTemp: Tasks[] = [...store.getState().tasks]
     const newTask = new Tasks({
-      id: Math.random(),
+      id: Math.floor(Math.random() * 1000),
       name: data.task,
       isCompleted: false,
       isEdit: false
@@ -54,7 +54,7 @@ function NewTodo() {
         </button>
       </div>
       <div className='todo-form border rounded p-4'>
-        <div className='add-todo d-flex flex-wrap justify-content-between align-items-baseline'>
+        <div className='add-todo d-flex flex-wrap justify-content-between align-items-baseline pe-3'>
           <div className='mt-3 flex-1 me-10'>
             <input
               type='text'

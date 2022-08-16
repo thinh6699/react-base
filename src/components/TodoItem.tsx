@@ -1,4 +1,6 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ErrorMessage } from '@hookform/error-message'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { store } from '../apps/store'
 import { Tasks } from '../models'
@@ -8,16 +10,26 @@ function TodoItem() {
   const dispatch = useDispatch()
   const lstTasks = store.getState().tasks
   const [listTasks, setListTask] = useState<Tasks[]>([])
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    criteriaMode: 'all',
+    mode: 'onSubmit'
+  }) // define validation
 
   useEffect(() => {
     setListTask(lstTasks)
   }, [lstTasks])
 
   const setCompleted = (item: Tasks) => {
-    item.isCompleted = !item.isCompleted
-    item.isEdit = false
-    dispatch(handleListTask([...listTasks]))
-    setListTask([...listTasks])
+    if (!item.isEdit) {
+      item.isCompleted = !item.isCompleted
+      item.isEdit = false
+      dispatch(handleListTask([...listTasks]))
+      setListTask([...lstTasks])
+    }
   }
 
   const deleteTask = (item: Tasks) => {
@@ -28,27 +40,19 @@ function TodoItem() {
     }
   }
 
-  const setEdit = (item: Tasks) => {
-    if (item.name !== '') {
-      item.isEdit = !item.isEdit
-      dispatch(handleListTask([...listTasks]))
-      setListTask([...listTasks])
+  const setEdit = (item: Tasks, data: any) => {
+    item.isEdit = !item.isEdit
+    if (!item.isEdit) {
+      item.name = data[`task${item.id}`]
     }
-  }
-
-  const setValue = (e: ChangeEvent<HTMLInputElement>, item: Tasks) => {
-    item.name = e.target.value
+    dispatch(handleListTask([...listTasks]))
     setListTask([...listTasks])
   }
 
-  const handleKeyPress = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    item: Tasks
-  ) => {
-    if (e.key === 'Enter') {
-      setEdit(item)
-    }
-  }
+  // const setValue = (e: ChangeEvent<HTMLInputElement>, item: Tasks) => {
+  //   item.name = e.target.value
+  //   setListTask([...listTasks])
+  // }
 
   return (
     <div className='list-todo'>
@@ -57,20 +61,37 @@ function TodoItem() {
           return (
             <div
               key={item.id}
-              className='d-flex flex-wrap align-items-center py-3 border-bottom mt-3 pe-3'
+              className='d-flex flex-wrap align-items-baseline py-3 border-bottom mt-3 pe-3'
             >
               {(() => {
                 if (item.isEdit) {
                   return (
                     <div className='flex-1 me-3 mb-3'>
                       <input
+                        defaultValue={item.name}
                         className='form-control minw--25'
                         type='text'
-                        value={item.name}
-                        onChange={e => {
-                          setValue(e, item)
+                        {...register(`task${item.id}`, {
+                          required: `Task${item.id} is required`
+                        })}
+                      />
+                      <ErrorMessage
+                        errors={errors}
+                        name={`task${item.id}`}
+                        render={({ messages }) => {
+                          return messages
+                            ? Object.entries(messages).map(
+                                ([type, message]) => (
+                                  <p
+                                    className='pt-1 text-danger mb-0'
+                                    key={type}
+                                  >
+                                    {message}
+                                  </p>
+                                )
+                              )
+                            : null
                         }}
-                        onKeyUp={e => handleKeyPress(e, item)}
                       />
                     </div>
                   )
@@ -90,7 +111,9 @@ function TodoItem() {
               <div className='d-flex align-items-center mb-3'>
                 <div className='me-2'>
                   <button
-                    onClick={() => setEdit(item)}
+                    onClick={handleSubmit(async (data: any) => {
+                      setEdit(item, data)
+                    })}
                     className='btn btn-outline-info me-2'
                   >
                     Edit
