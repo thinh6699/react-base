@@ -11,7 +11,7 @@ function TodoItem() {
 
   useEffect(() => {
     setListTask(lstTasks)
-  }, [lstTasks.length])
+  }, [lstTasks])
 
   const setCompleted = (item: Tasks) => {
     item.isCompleted = true
@@ -24,7 +24,7 @@ function TodoItem() {
     if (item.isCompleted) {
       let newList = listTasks.filter((task: Tasks) => task.id !== item.id)
       dispatch(handleListTask(newList))
-      setListTask(lstTasks)
+      setListTask([...lstTasks])
     }
   }
 

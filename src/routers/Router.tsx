@@ -1,11 +1,5 @@
 import { useEffect } from 'react'
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { store } from '../apps/store'
 import LayoutAuth from '../layouts/LayoutAuth'
 import LayoutMain from '../layouts/LayoutMain'
@@ -27,7 +21,7 @@ function Routers() {
           state: { from: location }
         })
       }
-    }, [])
+    })
 
     if (!token) {
       // Redirect them to the /login page, but save the current location they were

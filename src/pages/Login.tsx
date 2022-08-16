@@ -39,7 +39,7 @@ function Login() {
   useEffect(() => {
     dispatch(setTokenNull())
     localStorage.clear()
-  }, [])
+  })
 
   const login = (data: any) => {
     const from = (location.state as any)
