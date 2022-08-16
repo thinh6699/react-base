@@ -32,7 +32,12 @@ function NewTodo() {
   const addTask = (data: any) => {
     let lstTemp: Tasks[] = [...store.getState().tasks]
     lstTemp.push(
-      new Tasks({ id: Math.random(), name: data.task, isCompleted: false })
+      new Tasks({
+        id: Math.random(),
+        name: data.task,
+        isCompleted: false,
+        isEdit: false
+      })
     )
     dispatch(handleListTask(lstTemp))
     setValue('task', '')
@@ -44,14 +49,14 @@ function NewTodo() {
 
   return (
     <div className='todo mw--150 mx-auto'>
-      <h2 className='mt-10 mb-6 text-center'>My Todos</h2>
+      <h2 className='my-4 text-center text-center'>My Todos</h2>
       <div className='flex-center mb-6'>
         <button onClick={backToHome} className='btn btn-primary'>
           Go home
         </button>
       </div>
       <div className='todo-form border rounded p-4'>
-        <div className='add-todo d-flex justify-content-between align-items-baseline mb-5'>
+        <div className='add-todo d-flex flex-wrap justify-content-between align-items-baseline mb-5'>
           <div className='mt-3 flex-1 me-10'>
             <input
               type='text'

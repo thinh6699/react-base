@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { store } from '../apps/store'
 import { Tasks } from '../models'
@@ -15,6 +15,7 @@ function TodoItem() {
 
   const setCompleted = (item: Tasks) => {
     item.isCompleted = true
+    item.isEdit = false
     dispatch(handleListTask([...listTasks]))
     setListTask([...listTasks])
   }
@@ -27,44 +28,83 @@ function TodoItem() {
     }
   }
 
+  const setEdit = (item: Tasks) => {
+    if (item.name !== '') {
+      item.isEdit = !item.isEdit
+      dispatch(handleListTask([...listTasks]))
+      setListTask([...listTasks])
+    }
+  }
+
+  const setValue = (e: ChangeEvent<HTMLInputElement>, item: Tasks) => {
+    item.name = e.target.value
+    setListTask([...listTasks])
+  }
+
   return (
     <div className='list-todo'>
-      {listTasks.map((item: Tasks) => {
-        return (
-          <div
-            key={item.id}
-            className='d-flex flex-wrap align-items-center py-3 border-bottom mt-3'
-          >
+      <div className='maxh--137 overflow-auto'>
+        {listTasks.map((item: Tasks) => {
+          return (
             <div
-              className={
-                'flex-1 me-3 ms-3 mb-3 ' +
-                (item.isCompleted ? 'text-line-through' : '')
-              }
+              key={item.id}
+              className='d-flex flex-wrap align-items-center py-3 border-bottom mt-3 pe-3'
             >
-              {item.name}
+              {(() => {
+                if (item.isEdit) {
+                  return (
+                    <div className='flex-1 me-3 mb-3'>
+                      <input
+                        className='form-control minw--25'
+                        type='text'
+                        value={item.name}
+                        onChange={e => {
+                          setValue(e, item)
+                        }}
+                      />
+                    </div>
+                  )
+                } else {
+                  return (
+                    <div
+                      className={
+                        'flex-1 me-3 mb-3 py-2 px-4 minw--25 ' +
+                        (item.isCompleted ? 'text-line-through' : '')
+                      }
+                    >
+                      {item.name}
+                    </div>
+                  )
+                }
+              })()}
+              <div className='d-flex align-items-center mb-3'>
+                {item.isCompleted ? null : (
+                  <div className='me-2'>
+                    <button
+                      onClick={() => setEdit(item)}
+                      className='btn btn-outline-info me-2'
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => setCompleted(item)}
+                      className='btn btn-outline-success'
+                    >
+                      Complete
+                    </button>
+                  </div>
+                )}
+                <button
+                  onClick={() => deleteTask(item)}
+                  className='btn btn-outline-danger'
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            <div className='d-flex align-items-center mb-3'>
-              {item.isCompleted ? null : (
-                <div className='me-2'>
-                  <button className='btn btn-outline-info me-2'>Edit</button>
-                  <button
-                    onClick={() => setCompleted(item)}
-                    className='btn btn-outline-success'
-                  >
-                    Complete
-                  </button>
-                </div>
-              )}
-              <button
-                onClick={() => deleteTask(item)}
-                className='btn btn-outline-danger'
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
       {(() => {
         let inCompletedTask = listTasks.filter(
           (item: Tasks) => !item.isCompleted
