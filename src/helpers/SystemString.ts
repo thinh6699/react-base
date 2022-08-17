@@ -5,8 +5,6 @@ class SystemString {
     switch (code) {
       case 'vi':
         return i18next.t('language.vi')
-      case 'vi-VN':
-        return i18next.t('language.vi')
       case 'en':
         return i18next.t('language.en')
     }

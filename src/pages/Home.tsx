@@ -16,7 +16,7 @@ function Home() {
   const lstLanguages = ['vi', 'en']
 
   useEffect(() => {
-    setSelectedLanguage(i18next.language)
+    setSelectedLanguage(i18next.resolvedLanguage)
   }, [])
 
   const changeTheLanguage = (language: any) => {
