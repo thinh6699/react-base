@@ -81,6 +81,11 @@ function TodoItem() {
                         type='text'
                         {...register(`task${item.id}`, {
                           required: `Task${item.id} is required`
+                          // pattern: {
+                          //   value:
+                          //     /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[\]{}:;',+*?\/~$^=<>]).{8,}$/,
+                          //   message: 'Not valid'
+                          // }
                         })}
                         onKeyUp={handleSubmit((data: any, e: any) => {
                           if (e.key === 'Enter') {
