@@ -82,6 +82,11 @@ function TodoItem() {
                         {...register(`task${item.id}`, {
                           required: `Task${item.id} is required`
                         })}
+                        onKeyUp={handleSubmit((data: any, e: any) => {
+                          if (e.key === 'Enter') {
+                            setEdit(item, data)
+                          }
+                        })}
                       />
                       <ErrorMessage
                         errors={errors}

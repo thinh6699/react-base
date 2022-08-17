@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { useEffect, useState } from 'react'
 import i18next from 'i18next'
 import SystemString from '../helpers/SystemString'
+import ModalConfirm from '../components/ModalConfirm'
 
 function Home() {
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ function Home() {
   const { t } = useTranslation()
   const systemString = SystemString
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
+  const [show, setShow] = useState<boolean>(false)
   const lstLanguages = ['vi', 'en']
 
   useEffect(() => {
@@ -24,7 +26,12 @@ function Home() {
     setSelectedLanguage(language)
   }
 
+  const confirmLogout = () => {
+    setShow(true)
+  }
+
   const logout = () => {
+    setShow(false)
     dispatch(setTokenNull())
     navigate('login')
   }
@@ -62,13 +69,18 @@ function Home() {
             </Dropdown.Menu>
           </Dropdown>
           <button
-            onClick={logout}
+            onClick={confirmLogout}
             className='btn btn-outline-primary minw--35 mt-3'
           >
             {t('home.logout')}
           </button>
         </div>
       </div>
+      <ModalConfirm
+        isShow={show}
+        onOk={logout}
+        onCancel={() => setShow(false)}
+      />
     </div>
   )
 }
