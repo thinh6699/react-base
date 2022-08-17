@@ -3,14 +3,12 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
-import Language from '../stores/Language'
 import Tasks from '../stores/Tasks'
 import Token from '../stores/Token'
 
 const reducers = combineReducers({
   token: Token,
-  tasks: Tasks,
-  language: Language
+  tasks: Tasks
 })
 
 const persistConfig = {

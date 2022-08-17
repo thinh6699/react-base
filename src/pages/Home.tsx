@@ -4,35 +4,24 @@ import { useNavigate } from 'react-router-dom'
 import { setTokenNull } from '../stores/Token'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useEffect, useState } from 'react'
-import { SimpleModel } from '../models'
-import { languageChange } from '../stores/Language'
-import { changeLanguage } from 'i18next'
-import { store } from '../apps/store'
+import i18next from 'i18next'
+import SystemString from '../helpers/SystemString'
 
 function Home() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const systemString = SystemString
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
-  const lstLanguages: SimpleModel[] = [
-    {
-      text: 'English',
-      code: 'en'
-    },
-    {
-      text: 'Vietnamese',
-      code: 'vi'
-    }
-  ]
+  const lstLanguages = ['vi', 'en']
 
   useEffect(() => {
-    setSelectedLanguage(store.getState().language.text)
-  })
+    setSelectedLanguage(i18next.language)
+  }, [])
 
   const changeTheLanguage = (language: any) => {
-    changeLanguage(language.code) // i18next function to change language
-    setSelectedLanguage(language.text)
-    dispatch(languageChange(language)) // save language object to localStorage
+    i18next.changeLanguage(language) // i18next function to change language
+    setSelectedLanguage(language)
   }
 
   const logout = () => {
@@ -56,7 +45,7 @@ function Home() {
           </button>
           <Dropdown className='me-3 mt-3'>
             <Dropdown.Toggle className='minw--35' variant='secondary'>
-              {selectedLanguage}
+              {systemString.languageDisplay(selectedLanguage)}
             </Dropdown.Toggle>
 
             <Dropdown.Menu variant='dark'>
@@ -66,7 +55,7 @@ function Home() {
                     key={index}
                     onClick={() => changeTheLanguage(language)}
                   >
-                    {language.text}
+                    {systemString.languageDisplay(language)}
                   </Dropdown.Item>
                 )
               })}
