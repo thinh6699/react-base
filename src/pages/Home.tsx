@@ -15,13 +15,13 @@ function Home() {
   const systemString = SystemString
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
   const [show, setShow] = useState<boolean>(false)
-  const lstLanguages = ['vi', 'en']
+  const lstLanguages: string[] = ['vi', 'en']
 
   useEffect(() => {
     setSelectedLanguage(i18next.resolvedLanguage)
   }, [])
 
-  const changeTheLanguage = (language: any) => {
+  const changeTheLanguage = (language: string) => {
     i18next.changeLanguage(language) // i18next function to change language
     setSelectedLanguage(language)
   }
@@ -56,7 +56,7 @@ function Home() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu variant='dark'>
-              {lstLanguages.map((language: any, index: number) => {
+              {lstLanguages.map((language: string, index: number) => {
                 return (
                   <Dropdown.Item
                     key={index}
