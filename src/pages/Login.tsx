@@ -40,7 +40,7 @@ function Login() {
 
   useEffect(() => {
     dispatch(setTokenNull())
-    localStorage.clear()
+    // localStorage.clear()
   })
 
   const login = (data: any) => {
