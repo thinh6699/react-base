@@ -23,10 +23,7 @@ i18n
   .init({
     resources,
     detection: { caches: ['localStorage'] }, // set where to save user language
-    fallbackLng: 'vi',
-    interpolation: {
-      escapeValue: false // not needed for react as it escapes by default
-    }
+    fallbackLng: 'vi'
   })
 
 export default i18n
