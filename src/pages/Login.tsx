@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { handleToken, setTokenNull } from '../stores/Token'
 import FacebookLogin from 'react-facebook-login'
-import { saveUserInfo } from '../stores/UserInfo'
+import { saveUserInfo, setLoginFbDefault } from '../stores/UserInfo'
+import { store } from '../apps/store'
 
 function Login() {
   const navigate = useNavigate()
@@ -45,7 +46,11 @@ function Login() {
 
   useEffect(() => {
     dispatch(setTokenNull())
-    // localStorage.clear()
+    const isLoginFB = store.getState().userInfo.isLoginFB
+    if (isLoginFB) {
+      sessionStorage.clear()
+      dispatch(setLoginFbDefault())
+    }
   })
 
   const login = (data: any) => {
@@ -61,16 +66,18 @@ function Login() {
   }
 
   const loginWithFacebook = (response: any) => {
-    if (response && response.userID) {
-      const userInfo = {
-        name: response.name,
-        image: response.picture.data.url,
-        isLoginFB: true
+    window.FB.getLoginStatus((res: any) => {
+      if (res.status === 'connected') {
+        const userInfo = {
+          name: response.name,
+          image: response.picture.data.url,
+          isLoginFB: true
+        }
+        dispatch(handleToken(response.accessToken))
+        dispatch(saveUserInfo(userInfo))
+        navigate(from)
       }
-      dispatch(handleToken(response.accessToken))
-      dispatch(saveUserInfo(userInfo))
-      navigate(from)
-    }
+    })
   }
 
   return (
