@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import i18next from 'i18next'
 import SystemString from '../helpers/SystemString'
 import ModalConfirm from '../components/ModalConfirm'
+import { store } from '../apps/store'
+import { setLoginFbDefault } from '../stores/UserInfo'
 
 function Home() {
   const navigate = useNavigate()
@@ -33,6 +35,11 @@ function Home() {
   const logout = () => {
     setShow(false)
     dispatch(setTokenNull())
+    const isLoginFB = store.getState().userInfo.isLoginFB
+    if (isLoginFB) {
+      window.FB.logout()
+      dispatch(setLoginFbDefault())
+    }
     navigate('login')
   }
 

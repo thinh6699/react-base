@@ -5,10 +5,12 @@ import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
 import Tasks from '../stores/Tasks'
 import Token from '../stores/Token'
+import UserInfo from '../stores/UserInfo'
 
 const reducers = combineReducers({
   token: Token,
-  tasks: Tasks
+  tasks: Tasks,
+  userInfo: UserInfo
 })
 
 const persistConfig = {

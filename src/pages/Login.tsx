@@ -5,12 +5,17 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { handleToken, setTokenNull } from '../stores/Token'
+import FacebookLogin from 'react-facebook-login'
+import { saveUserInfo } from '../stores/UserInfo'
 
 function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
   const { t } = useTranslation()
+  const from = (location.state as any)
+    ? (location.state as any).from.pathname
+    : '/'
   const {
     register,
     handleSubmit,
@@ -44,11 +49,29 @@ function Login() {
   })
 
   const login = (data: any) => {
-    const from = (location.state as any)
-      ? (location.state as any).from.pathname
-      : '/'
+    const userInfo = {
+      name: 'Thinh',
+      image:
+        'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000',
+      isLoginFB: false
+    }
     dispatch(handleToken('ey12456abcd789'))
+    dispatch(saveUserInfo(userInfo))
     navigate(from)
+  }
+
+  const loginWithFacebook = (response: any) => {
+    console.log(response)
+    if (response) {
+      const userInfo = {
+        name: response.name,
+        image: response.picture.data.url,
+        isLoginFB: true
+      }
+      dispatch(handleToken(response.accessToken))
+      dispatch(saveUserInfo(userInfo))
+      navigate(from)
+    }
   }
 
   return (
@@ -107,13 +130,25 @@ function Login() {
           />
         </div>
 
-        <div className='flex-center'>
+        <div className='flex-center mb-5'>
           <button
             onClick={handleSubmit(login)}
             className='btn btn-primary minw--25'
           >
             Login
           </button>
+        </div>
+
+        <div className='flex-center'>
+          <FacebookLogin
+            size='medium'
+            appId='602116111535757'
+            autoLoad={false}
+            fields='name,email,picture'
+            scope='public_profile,user_friends'
+            callback={loginWithFacebook}
+            icon='fa-facebook'
+          />
         </div>
       </div>
     </div>

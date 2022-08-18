@@ -11,6 +11,12 @@ import reportWebVitals from './reportWebVitals'
 import i18n from './langs/index'
 import { I18nextProvider } from 'react-i18next'
 
+declare global {
+  interface Window {
+    FB: any
+  }
+}
+
 let persistor = persistStore(store)
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
