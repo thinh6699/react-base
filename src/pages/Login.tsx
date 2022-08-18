@@ -61,8 +61,7 @@ function Login() {
   }
 
   const loginWithFacebook = (response: any) => {
-    console.log(response)
-    if (response) {
+    if (response && response.userID) {
       const userInfo = {
         name: response.name,
         image: response.picture.data.url,
@@ -145,7 +144,7 @@ function Login() {
             appId='602116111535757'
             autoLoad={false}
             fields='name,email,picture'
-            scope='public_profile,user_friends'
+            scope='public_profile'
             callback={loginWithFacebook}
             icon='fa-facebook'
           />
