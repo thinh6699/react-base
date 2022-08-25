@@ -32,9 +32,7 @@ function NewTodo() {
     let lstTemp: Tasks[] = [...store.getState().tasks]
     const newTask = new Tasks({
       id: Math.floor(Math.random() * 1000),
-      name: data.task,
-      isCompleted: false,
-      isEdit: false
+      name: data.task
     })
     lstTemp.push(newTask)
     dispatch(handleListTask(lstTemp))

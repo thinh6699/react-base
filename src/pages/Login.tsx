@@ -14,6 +14,9 @@ function Login() {
   const dispatch = useDispatch()
   const location = useLocation()
   const { t } = useTranslation()
+  const randomState = Math.random().toString(36).substr(5, 9)
+  const redirectUrl = window.location.origin + '/line-login'
+  const lineUrl = `https://access.line.me/oauth2/v2.1/authorize?client_id=${process.env.REACT_APP_LINE_CLIENT_ID}&scope=openid+profile+email&state=${randomState}&response_type=code&redirect_uri=${redirectUrl}`
   const from = (location.state as any)
     ? (location.state as any).from.pathname
     : '/'
@@ -145,7 +148,7 @@ function Login() {
           </button>
         </div>
 
-        <div className='flex-center'>
+        <div className='flex-center mb-5'>
           <FacebookLogin
             size='medium'
             appId='602116111535757'
@@ -155,6 +158,15 @@ function Login() {
             callback={loginWithFacebook}
             icon='fa-facebook'
           />
+        </div>
+
+        <div className='flex-center w--53 mw-100 mx-auto mb-5'>
+          <a
+            href={lineUrl}
+            className='btn btn-success w-100 px-3 py-2 fs-15 text-white rounded-5'
+          >
+            Login with line
+          </a>
         </div>
       </div>
     </div>

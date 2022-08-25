@@ -4,13 +4,15 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
 import Tasks from '../stores/Tasks'
+import Theme from '../stores/Theme'
 import Token from '../stores/Token'
 import UserInfo from '../stores/UserInfo'
 
 const reducers = combineReducers({
   token: Token,
   tasks: Tasks,
-  userInfo: UserInfo
+  userInfo: UserInfo,
+  theme: Theme
 })
 
 const persistConfig = {

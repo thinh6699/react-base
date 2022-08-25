@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setTokenNull } from '../stores/Token'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import i18next from 'i18next'
 import SystemString from '../helpers/SystemString'
 import ModalConfirm from '../components/ModalConfirm'
@@ -14,6 +14,7 @@ function Home() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const fileInput = useRef<any>(null)
   const systemString = SystemString
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
   const [show, setShow] = useState<boolean>(false)
@@ -34,7 +35,7 @@ function Home() {
 
   const logout = () => {
     setShow(false)
-    dispatch(setTokenNull())
+    store.dispatch(setTokenNull())
     const isLoginFB = store.getState().userInfo.isLoginFB
     if (isLoginFB) {
       window.FB.logout()
@@ -47,10 +48,43 @@ function Home() {
     navigate('new-todo')
   }
 
+  const resetValue = () => {
+    fileInput.current!.value = null
+  }
+
+  const onFileChange = (e: any) => {
+    const fileType = ['image/png']
+    const files: File[] = e.target.files || e.dataTransfer.files
+    const file: File = files[0]
+    if (!files.length) {
+      return
+    }
+    if (!fileType.includes(file.type)) {
+      console.log('error')
+      return
+    }
+    console.log(file)
+  }
+
   return (
     <div className='homepage mw--125 mx-auto'>
       <div className='flex-center min-h-screen-main'>
         <div className='flex-center flex-wrap'>
+          <input
+            id='file'
+            ref={fileInput}
+            type='file'
+            className='h--0 w--0 overflow-hidden'
+            accept='*'
+            onClick={resetValue}
+            onChange={onFileChange}
+          />
+          <label
+            htmlFor='file'
+            className='minw--25 py-2 flex-center bg-success rounded position-relative cursor-pointer mb-0 mt-3 me-3'
+          >
+            Choose File
+          </label>
           <button
             onClick={createTodo}
             className='btn btn-primary minw--35 me-3 mt-3'

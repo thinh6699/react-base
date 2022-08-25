@@ -3,6 +3,7 @@ import { store } from '../apps/store'
 import LayoutAuth from '../layouts/LayoutAuth'
 import LayoutMain from '../layouts/LayoutMain'
 import Home from '../pages/Home'
+import LineLogin from '../pages/LineLogin'
 import Login from '../pages/Login'
 import NewTodo from '../pages/NewTodo'
 
@@ -32,6 +33,7 @@ function Routers() {
     <Routes>
       <Route element={<LayoutAuth />}>
         <Route path='login' element={<Login />} />
+        <Route path='line-login' element={<LineLogin />} />
       </Route>
       <Route
         element={
