@@ -8,6 +8,7 @@ import { handleToken, setTokenNull } from '../stores/Token'
 import FacebookLogin from 'react-facebook-login'
 import { saveUserInfo, setLoginFbDefault } from '../stores/UserInfo'
 import { store } from '../apps/store'
+import GoogleLogin from 'react-google-login'
 
 function Login() {
   const navigate = useNavigate()
@@ -81,6 +82,16 @@ function Login() {
         navigate(from)
       }
     })
+  }
+
+  const onSuccess = (response: any) => {
+    console.log(response)
+    console.log('onSuccess')
+  }
+
+  const onFailure = (response: any) => {
+    console.log(response)
+    console.log('onFailure')
   }
 
   return (
@@ -160,7 +171,16 @@ function Login() {
           />
         </div>
 
-        <div className='flex-center w--53 mw-100 mx-auto mb-5'>
+        <div className='flex-center mb-5'>
+          <GoogleLogin
+            clientId='900447470936-b314st4sdfjk8e9rs8rii2atj4f20oeg.apps.googleusercontent.com'
+            buttonText='Login'
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+          />
+        </div>
+
+        <div className='flex-center w--53 mw-100 mx-auto'>
           <a
             href={lineUrl}
             className='btn btn-success w-100 px-3 py-2 fs-15 text-white rounded-5'
