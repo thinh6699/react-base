@@ -8,7 +8,8 @@ import i18next from 'i18next'
 import SystemString from '../helpers/SystemString'
 import ModalConfirm from '../components/ModalConfirm'
 import { store } from '../apps/store'
-import { setLoginFbDefault } from '../stores/UserInfo'
+import { setLoginDefault } from '../stores/UserInfo'
+import { useGoogleLogout } from 'react-google-login'
 
 function Home() {
   const navigate = useNavigate()
@@ -19,6 +20,9 @@ function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
   const [show, setShow] = useState<boolean>(false)
   const lstLanguages: string[] = ['vi', 'en']
+  const { signOut } = useGoogleLogout({
+    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID as string
+  })
 
   useEffect(() => {
     setSelectedLanguage(i18next.resolvedLanguage)
@@ -36,11 +40,15 @@ function Home() {
   const logout = () => {
     setShow(false)
     store.dispatch(setTokenNull())
-    const isLoginFB = store.getState().userInfo.isLoginFB
+    const isLoginFB = store.getState().userInfo?.isLoginFB
+    const isLoginGoogle = store.getState().userInfo?.isLoginGoogle
     if (isLoginFB) {
       window.FB.logout()
-      dispatch(setLoginFbDefault())
     }
+    if (isLoginGoogle) {
+      signOut()
+    }
+    dispatch(setLoginDefault())
     navigate('login')
   }
 

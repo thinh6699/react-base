@@ -9,13 +9,18 @@ export const userInfo = createSlice({
     saveUserInfo: (state: any, value: any) => {
       return value.payload
     },
-    setLoginFbDefault: (state: any) => {
-      state.isLoginFB = false
+    setLoginDefault: (state: any) => {
+      if (state.isLoginFB) {
+        delete state.isLoginFB
+      }
+      if (state.isLoginGoogle) {
+        delete state.isLoginGoogle
+      }
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { saveUserInfo, setLoginFbDefault } = userInfo.actions
+export const { saveUserInfo, setLoginDefault } = userInfo.actions
 
 export default userInfo.reducer

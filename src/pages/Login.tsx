@@ -6,9 +6,10 @@ import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { handleToken, setTokenNull } from '../stores/Token'
 import FacebookLogin from 'react-facebook-login'
-import { saveUserInfo, setLoginFbDefault } from '../stores/UserInfo'
+import { saveUserInfo, setLoginDefault } from '../stores/UserInfo'
 import { store } from '../apps/store'
 import GoogleLogin from 'react-google-login'
+import { gapi } from 'gapi-script'
 
 function Login() {
   const navigate = useNavigate()
@@ -50,19 +51,26 @@ function Login() {
 
   useEffect(() => {
     dispatch(setTokenNull())
-    const isLoginFB = store.getState().userInfo.isLoginFB
+    const isLoginFB = store.getState().userInfo?.isLoginFB
     if (isLoginFB) {
       sessionStorage.clear()
-      dispatch(setLoginFbDefault())
+      dispatch(setLoginDefault())
     }
+
+    const start = () => {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        scope: 'profile email'
+      })
+    }
+    gapi.load('client:auth2', start)
   })
 
   const login = (data: any) => {
     const userInfo = {
       name: 'Thinh',
       image:
-        'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000',
-      isLoginFB: false
+        'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000'
     }
     dispatch(handleToken('ey12456abcd789'))
     dispatch(saveUserInfo(userInfo))
@@ -84,14 +92,17 @@ function Login() {
     })
   }
 
-  const onSuccess = (response: any) => {
-    console.log(response)
-    console.log('onSuccess')
-  }
-
-  const onFailure = (response: any) => {
-    console.log(response)
-    console.log('onFailure')
+  const responseGoogle = (response: any) => {
+    if (response.accessToken) {
+      const userInfo = {
+        name: response.profileObj.givenName,
+        image: response.profileObj.imageUrl,
+        isLoginGoogle: true
+      }
+      dispatch(handleToken(response.accessToken))
+      dispatch(saveUserInfo(userInfo))
+      navigate(from)
+    }
   }
 
   return (
@@ -173,10 +184,11 @@ function Login() {
 
         <div className='flex-center mb-5'>
           <GoogleLogin
-            clientId='900447470936-b314st4sdfjk8e9rs8rii2atj4f20oeg.apps.googleusercontent.com'
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID as string}
             buttonText='Login'
-            onSuccess={onSuccess}
-            onFailure={onFailure}
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
           />
         </div>
 
