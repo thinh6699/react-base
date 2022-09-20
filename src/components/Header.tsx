@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 import MenuNavigate from './MenuNavigate'
 
 function Header() {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
   return (
     <div className='fixed top-0 left-0 right-0 z-1030 border-b border-solid border-border-color bg-white'>

@@ -87,7 +87,7 @@ function Home() {
                       {project.description}
                     </div>
                     <div className='flex items-center'>
-                      <i className='bg-danger-200 text-xl fab fa-instagram mx-4'></i>
+                      <i className='text-danger-200 text-xl fab fa-instagram mx-4'></i>
                       <div className='font-bold truncate'>
                         {project.price} 人以上
                       </div>

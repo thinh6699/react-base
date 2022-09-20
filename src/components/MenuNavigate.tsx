@@ -37,11 +37,11 @@ function MenuNavigate() {
     >
       {lstNavigation.map((item: ListNavigation) => {
         return (
-          <SwiperSlide className='flex items-center overflow-hidden'>
-            <div
-              key={item.id}
-              className='flex items-center justify-center flex-col pr-3 mr-2'
-            >
+          <SwiperSlide
+            key={item.id}
+            className='flex items-center overflow-hidden'
+          >
+            <div className='flex items-center justify-center flex-col pr-3 mr-2'>
               <div className='w-6 h-6 mb-1'>
                 <img src={item.image} alt='' />
               </div>
