@@ -1,0 +1,31 @@
+.swiper-pagination-bullet {
+  background-color: #fff;
+}
+
+.swiper-button-disabled {
+  display: none;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: black;
+  background: #f7f7f7;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  transition: all linear 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &::after {
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+.project-item .swiper-button-prev,
+.project-item .swiper-button-next {
+  display: none;
+}

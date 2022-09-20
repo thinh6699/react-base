@@ -1,8 +1,6 @@
 function Footer() {
   return (
-    <div className='fixed-bottom h--15 border-top flex-center bg-secondary'>
-      Footer
-    </div>
+    <div className='fixed-bottom h--15 flex-center bg-secondary'>Footer</div>
   )
 }
 

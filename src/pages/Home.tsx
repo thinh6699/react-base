@@ -1,135 +1,104 @@
-import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { setTokenNull } from '../stores/Token'
-import Dropdown from 'react-bootstrap/Dropdown'
-import { useEffect, useRef, useState } from 'react'
-import i18next from 'i18next'
-import SystemString from '../helpers/SystemString'
-import ModalConfirm from '../components/ModalConfirm'
-import { store } from '../apps/store'
-import { setLoginDefault } from '../stores/UserInfo'
-import { useGoogleLogout } from 'react-google-login'
+import { useEffect, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination } from 'swiper'
+import MenuNavigate from '../components/MenuNavigate'
+
+export class Project {
+  id!: number
+  title: string = ''
+  description: string = ''
+  price: number = 0
+  photos: string[] = []
+  constructor(init?: Partial<Project>) {
+    Object.assign(this, init)
+  }
+}
 
 function Home() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { t } = useTranslation()
-  const fileInput = useRef<any>(null)
-  const systemString = SystemString
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('')
-  const [show, setShow] = useState<boolean>(false)
-  const lstLanguages: string[] = ['vi', 'en']
-  const { signOut } = useGoogleLogout({
-    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID as string
-  })
+  const [lstProjects, setListProjects] = useState<Project[]>([])
 
   useEffect(() => {
-    setSelectedLanguage(i18next.resolvedLanguage)
+    let lstProjects: Project[] = []
+    for (let i = 0; i < 10; i++) {
+      lstProjects.push(
+        new Project({
+          id: Math.floor(Math.random() * 1000),
+          title: `ICTLホテルの紹介案件 ${i}`,
+          description: `description ${i}`,
+          price: Math.floor(Math.random() * 10000),
+          photos: [
+            require('../assets/images/abiansemal.webp'),
+            require('../assets/images/abiansemal2.webp'),
+            require('../assets/images/abiansemal3.webp')
+          ]
+        })
+      )
+    }
+    setListProjects(lstProjects)
   }, [])
 
-  const changeTheLanguage = (language: string) => {
-    i18next.changeLanguage(language) // i18next function to change language
-    setSelectedLanguage(language)
-  }
-
-  const confirmLogout = () => {
-    setShow(true)
-  }
-
-  const logout = () => {
-    setShow(false)
-    store.dispatch(setTokenNull())
-    const isLoginFB = store.getState().userInfo?.isLoginFB
-    const isLoginGoogle = store.getState().userInfo?.isLoginGoogle
-    if (isLoginFB) {
-      window.FB.logout()
-    }
-    if (isLoginGoogle) {
-      signOut()
-    }
-    dispatch(setLoginDefault())
-    navigate('login')
-  }
-
-  const createTodo = () => {
-    navigate('new-todo')
-  }
-
-  const resetValue = () => {
-    fileInput.current!.value = null
-  }
-
-  const onFileChange = (e: any) => {
-    const fileType = ['image/png']
-    const files: File[] = e.target.files || e.dataTransfer.files
-    const file: File = files[0]
-    if (!files.length) {
-      return
-    }
-    if (!fileType.includes(file.type)) {
-      console.log('error')
-      return
-    }
-    console.log(file)
-  }
-
   return (
-    <div className='homepage mw--125 mx-auto'>
-      <div className='flex-center min-h-screen-main'>
-        <div className='flex-center flex-wrap'>
-          <input
-            id='file'
-            ref={fileInput}
-            type='file'
-            className='h--0 w--0 overflow-hidden'
-            accept='*'
-            onClick={resetValue}
-            onChange={onFileChange}
-          />
-          <label
-            htmlFor='file'
-            className='minw--25 py-2 flex-center bg-success rounded position-relative cursor-pointer mb-0 mt-3 me-3'
-          >
-            Choose File
-          </label>
-          <button
-            onClick={createTodo}
-            className='btn btn-primary minw--35 me-3 mt-3'
-          >
-            {t('home.new_todo')}
-          </button>
-          <Dropdown className='me-3 mt-3'>
-            <Dropdown.Toggle className='minw--35' variant='secondary'>
-              {systemString.languageDisplay(selectedLanguage)}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu variant='dark'>
-              {lstLanguages.map((language: string, index: number) => {
-                return (
-                  <Dropdown.Item
-                    key={index}
-                    onClick={() => changeTheLanguage(language)}
-                  >
-                    {systemString.languageDisplay(language)}
-                  </Dropdown.Item>
-                )
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <button
-            onClick={confirmLogout}
-            className='btn btn-outline-primary minw--35 mt-3'
-          >
-            {t('home.logout')}
-          </button>
+    <div className='top-page mt-36 md:mt-20'>
+      <div className='flex items-center justify-between mb-10'>
+        <div className='w-full hidden md:block mt-10 min-w-142'>
+          <MenuNavigate />
+        </div>
+        <div className='hidden md:flex items-center border border-solid border-border-color rounded-2xl p-3 mt-10 cursor-pointer'>
+          <i className='text-sm fas fa-sliders-h mr-2'></i>
+          <span className='whitespace-nowrap'>フィルター</span>
         </div>
       </div>
-      <ModalConfirm
-        isShow={show}
-        onOk={logout}
-        onCancel={() => setShow(false)}
-      />
+
+      {/* List Project */}
+      <div className='list-project'>
+        <div className='row gy-5'>
+          {lstProjects.map((project: Project) => {
+            return (
+              <div
+                key={project.id}
+                className='col-md-6 col-lg-4 col-xl-3 col-xxxl--5'
+              >
+                <div className='project-item cursor-pointer'>
+                  <Swiper
+                    pagination={true}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className='mySwiper'
+                    slidesPerView={1}
+                  >
+                    {project.photos.map((photo: any, index: number) => {
+                      return (
+                        <SwiperSlide key={index} className='w-100'>
+                          <figure className='mb-3 relative pt-p-80'>
+                            <img
+                              className='w-full h-full object-cover rounded-2xl absolute top-0'
+                              src={photo}
+                              alt=''
+                            />
+                            <i className='fal fa-heart absolute top-4 right-4 text-xl text-white'></i>
+                          </figure>
+                        </SwiperSlide>
+                      )
+                    })}
+                  </Swiper>
+                  <p className='mb-2 font-bold truncate'>{project.title}</p>
+                  <div className='flex items-center justify-between'>
+                    <div className='font-bold truncate'>
+                      {project.description}
+                    </div>
+                    <div className='flex items-center'>
+                      <i className='bg-danger-200 text-xl fab fa-instagram mx-4'></i>
+                      <div className='font-bold truncate'>
+                        {project.price} 人以上
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
     </div>
   )
 }

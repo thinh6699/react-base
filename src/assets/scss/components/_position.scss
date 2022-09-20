@@ -36,6 +36,22 @@
   .bottom--#{$i} {
     bottom: $i * 4px !important;
   }
+
+  .start--n#{$i} {
+    left: $i * -4px !important;
+  }
+
+  .end--n#{$i} {
+    right: $i * -4px !important;
+  }
+
+  .top--n#{$i} {
+    top: $i * -4px !important;
+  }
+
+  .bottom--n#{$i} {
+    bottom: $i * -4px !important;
+  }
 }
 
 @include media-breakpoint-up(lg) {

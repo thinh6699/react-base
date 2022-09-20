@@ -12,6 +12,11 @@
 @import 'mixins';
 @import 'common';
 
+// Swiper
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+
 // Style components
 @import './components/button';
 @import './components/space';
@@ -29,3 +34,5 @@
 @import './components/calendar';
 @import './components/footer';
 @import './components/tooltip';
+@import './components/header';
+@import './components/swiper';

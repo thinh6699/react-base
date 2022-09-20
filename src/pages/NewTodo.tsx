@@ -51,7 +51,7 @@ function NewTodo() {
           Go home
         </button>
       </div>
-      <div className='todo-form border rounded p-4'>
+      <div className='todo-form border rounded p-4 mb-20'>
         <div className='add-todo d-flex flex-wrap justify-content-between align-items-baseline pe-3'>
           <div className='mt-3 flex-1 me-10'>
             <input
