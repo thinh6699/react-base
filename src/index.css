@@ -15,6 +15,3 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Custom css */
-@import './index.scss';

@@ -51,46 +51,41 @@ function Home() {
 
       {/* List Project */}
       <div className='list-project'>
-        <div className='row gy-5'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6'>
           {lstProjects.map((project: Project) => {
             return (
-              <div
-                key={project.id}
-                className='col-md-6 col-lg-4 col-xl-3 col-xxxl--5'
-              >
-                <div className='project-item cursor-pointer'>
-                  <Swiper
-                    pagination={true}
-                    navigation={true}
-                    modules={[Pagination, Navigation]}
-                    className='mySwiper'
-                    slidesPerView={1}
-                  >
-                    {project.photos.map((photo: any, index: number) => {
-                      return (
-                        <SwiperSlide key={index} className='w-100'>
-                          <figure className='mb-3 relative pt-p-80'>
-                            <img
-                              className='w-full h-full object-cover rounded-2xl absolute top-0'
-                              src={photo}
-                              alt=''
-                            />
-                            <i className='fal fa-heart absolute top-4 right-4 text-xl text-white'></i>
-                          </figure>
-                        </SwiperSlide>
-                      )
-                    })}
-                  </Swiper>
-                  <p className='mb-2 font-bold truncate'>{project.title}</p>
-                  <div className='flex items-center justify-between'>
+              <div key={project.id} className='project-item cursor-pointer'>
+                <Swiper
+                  pagination={true}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
+                  className='mySwiper'
+                  slidesPerView={1}
+                >
+                  {project.photos.map((photo: any, index: number) => {
+                    return (
+                      <SwiperSlide key={index} className='w-100'>
+                        <figure className='mb-3 relative pt-p-80'>
+                          <img
+                            className='w-full h-full object-cover rounded-2xl absolute top-0'
+                            src={photo}
+                            alt=''
+                          />
+                          <i className='fal fa-heart absolute top-4 right-4 text-xl text-white'></i>
+                        </figure>
+                      </SwiperSlide>
+                    )
+                  })}
+                </Swiper>
+                <p className='mb-2 font-bold truncate'>{project.title}</p>
+                <div className='flex items-center justify-between'>
+                  <div className='font-bold truncate'>
+                    {project.description}
+                  </div>
+                  <div className='flex items-center'>
+                    <i className='t-danger-200 text-xl fab fa-instagram mx-4'></i>
                     <div className='font-bold truncate'>
-                      {project.description}
-                    </div>
-                    <div className='flex items-center'>
-                      <i className='text-danger-200 text-xl fab fa-instagram mx-4'></i>
-                      <div className='font-bold truncate'>
-                        {project.price} 人以上
-                      </div>
+                      {project.price} 人以上
                     </div>
                   </div>
                 </div>

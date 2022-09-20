@@ -2,6 +2,10 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem'
+    },
     extend: {
       colors: {
         'border-color': '#707070',
@@ -11,6 +15,7 @@ module.exports = {
         secondary: '#f7f7f7'
       },
       minWidth: {
+        25: '100px',
         43: '172px',
         50: '200px',
         63: '252px',
@@ -18,6 +23,9 @@ module.exports = {
       },
       fontSize: {
         10: '10px'
+      },
+      zIndex: {
+        1030: 1030
       }
     }
   },

@@ -1,15 +1,15 @@
 @import '../fontawesome-pro-5.15.3-web/css/all.min.css';
-@import 'variables';
+// @import 'variables';
 
 // Custom bootstrap variable foreach component, custom $variable only
 // https://getbootstrap.com > Components[button, input,...] > Sass > Variables
-@import './custom-bootstrap/border';
-@import './custom-bootstrap/button';
-@import './custom-bootstrap/input';
-@import './custom-bootstrap/spacer';
-@import './custom-bootstrap/theme-colors';
-@import '~bootstrap/scss/bootstrap.scss';
-@import 'mixins';
+// @import './custom-bootstrap/border';
+// @import './custom-bootstrap/button';
+// @import './custom-bootstrap/input';
+// @import './custom-bootstrap/spacer';
+// @import './custom-bootstrap/theme-colors';
+// @import '~bootstrap/scss/bootstrap.scss';
+// @import 'mixins';
 @import 'common';
 
 // Swiper
@@ -18,21 +18,21 @@
 @import 'swiper/css/navigation';
 
 // Style components
-@import './components/button';
+// @import './components/button';
 @import './components/space';
-@import './components/text';
-@import './components/position';
-@import './components/rounded';
-@import './components/input';
-@import './components/z-index';
-@import './components/color';
-@import './components/border';
-@import './components/opacity';
-@import './components/scrollbar';
-@import './components/flex';
-@import './components/modal';
-@import './components/calendar';
-@import './components/footer';
-@import './components/tooltip';
+// @import './components/text';
+// @import './components/position';
+// @import './components/rounded';
+// @import './components/input';
+// @import './components/z-index';
+// @import './components/color';
+// @import './components/border';
+// @import './components/opacity';
+// @import './components/scrollbar';
+// @import './components/flex';
+// @import './components/modal';
+// @import './components/calendar';
+// @import './components/footer';
+// @import './components/tooltip';
 @import './components/header';
 @import './components/swiper';
