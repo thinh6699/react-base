@@ -5,10 +5,10 @@ function Header() {
   const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
   return (
-    <div className='fixed top-0 left-0 right-0 z-1030 border-b border-solid border-border-color bg-white'>
+    <header className='fixed top-0 left-0 right-0 z-1030 border-b border-solid border-secondary-200 bg-white'>
       {/* Mobile search */}
       <div className='md:hidden flex items-center h-36 px-6 flex-wrap'>
-        <div className='mobile-search flex items-center w-full p-1 border border-solid border-border-color rounded-3xl shadow-sm cursor-pointer'>
+        <div className='mobile-search flex items-center w-full p-1 border border-solid border-secondary-200 rounded-3xl shadow-md cursor-pointer'>
           <i className='far fa-search px-4'></i>
           <div className='flex flex-col w-full min-w-43'>
             <span className='text-sm font-bold'>行き先は？</span>
@@ -22,13 +22,13 @@ function Header() {
           </div>
           <div
             style={{ marginRight: '2px' }}
-            className='flex items-center justify-center flex-shrink-0 h-10 w-10 border border-solid border-border-color rounded-full'
+            className='flex items-center justify-center flex-shrink-0 h-10 w-10 border border-solid border-secondary-200 rounded-full'
           >
             <i className='fas fa-sliders-h'></i>
           </div>
         </div>
 
-        <div className='w-full md:hidden'>
+        <div className='mobile-navigation w-full md:hidden'>
           <MenuNavigate />
         </div>
       </div>
@@ -41,7 +41,7 @@ function Header() {
           </div>
 
           {/* Search Input */}
-          <div className='hover:shadow-md flex items-center min-w-63 p-1 mx-4 border border-solid border-border-color rounded-3xl cursor-pointer transition-all duration-200 ease-linear'>
+          <div className='hover:shadow-md flex items-center min-w-63 p-1 mx-4 border border-solid border-secondary-200 rounded-3xl cursor-pointer transition-all duration-200 ease-linear'>
             {(() => {
               if (id) {
                 return (
@@ -55,7 +55,7 @@ function Header() {
                     <span className='text-sm font-bold px-4 truncate'>
                       どこでも
                     </span>
-                    <span className='text-sm font-bold px-4 truncate border-l border-r border-solid border-border-color'>
+                    <span className='text-sm font-bold px-4 truncate border-l border-r border-solid border-secondary-200'>
                       週の指定なし
                     </span>
                     <span className='text-sm px-4 truncate'>
@@ -78,7 +78,7 @@ function Header() {
               <div className='hover:bg-secondary flex items-center justify-center h-10 w-10 mr-3 rounded-full cursor-pointer transition-all duration-200 ease-linear'>
                 <i className='far fa-globe'></i>
               </div>
-              <div className='hover:shadow-md flex items-center p-1 rounded-3xl border border-solid border-border-color cursor-pointer transition-all duration-200 ease-linear relative'>
+              <div className='hover:shadow-md flex items-center p-1 rounded-3xl border border-solid border-secondary-200 cursor-pointer transition-all duration-200 ease-linear relative'>
                 <i className='text-sm ml-2 mr-4 fas fa-bars'></i>
                 <div className='user-avatar h-8 w-8 rounded-full relative'>
                   <div className='text-10 bg-danger-300 text-white h-4 w-4 flex items-center justify-center rounded-full absolute -top-1 -right-1'>
@@ -107,7 +107,7 @@ function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

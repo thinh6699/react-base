@@ -38,12 +38,12 @@ function Home() {
   }, [])
 
   return (
-    <div className='top-page mt-36 md:mt-20'>
+    <div className='top-page mt-36 md:mt-20 mb-10'>
       <div className='flex items-center justify-between mb-10'>
-        <div className='w-full hidden md:block mt-10 min-w-142'>
+        <div className='list-navigation w-full hidden md:block mt-10 min-w-142'>
           <MenuNavigate />
         </div>
-        <div className='hidden md:flex items-center border border-solid border-border-color rounded-2xl p-3 mt-10 cursor-pointer'>
+        <div className='hidden md:flex items-center border border-solid border-secondary-200 rounded-2xl p-3 mt-10 cursor-pointer'>
           <i className='text-sm fas fa-sliders-h mr-2'></i>
           <span className='whitespace-nowrap'>フィルター</span>
         </div>
@@ -83,7 +83,7 @@ function Home() {
                     {project.description}
                   </div>
                   <div className='flex items-center'>
-                    <i className='t-danger-200 text-xl fab fa-instagram mx-4'></i>
+                    <i className='text-danger-200 text-xl fab fa-instagram mx-4'></i>
                     <div className='font-bold truncate'>
                       {project.price} 人以上
                     </div>

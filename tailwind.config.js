@@ -8,11 +8,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        'border-color': '#707070',
         danger: '#e51d50',
+        secondary: '#f7f7f7',
+        'secondary-200': '#707070',
+        'secondary-300': 'dddddd',
         'danger-200': '#d43074',
-        'danger-300': '#ff385c',
-        secondary: '#f7f7f7'
+        'danger-300': '#ff385c'
       },
       minWidth: {
         25: '100px',

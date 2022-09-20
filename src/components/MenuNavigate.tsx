@@ -20,7 +20,7 @@ function MenuNavigate() {
         new ListNavigation({
           id: Math.floor(Math.random() * 1000),
           image: require('../assets/images/island.jpg'),
-          name: `国立公園 ${i}`
+          name: `国立公園 ${i + 1}`
         })
       )
     }

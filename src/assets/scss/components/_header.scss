@@ -1,12 +1,6 @@
-@media (min-width: 1660px) {
-  .container {
-    max-width: 1600px;
-  }
-
-  .col-xxxl--5 {
-    flex: 0 0 auto;
-    width: 20%;
-  }
+.project-item .swiper-button-prev,
+.project-item .swiper-button-next {
+  display: none;
 }
 
 .project-item:hover {
@@ -20,9 +14,12 @@
   }
 }
 
-// @media (max-width: 768px) {
-//   .list-navigation .swiper-button-prev,
-//   .swiper-button-next {
-//     display: none;
-//   }
-// }
+.list-navigation .swiper-button-prev,
+.list-navigation .swiper-button-next {
+  border: 1px solid #707070;
+}
+
+.mobile-navigation .swiper-button-prev,
+.mobile-navigation .swiper-button-next {
+  display: none;
+}
